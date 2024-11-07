@@ -6,13 +6,14 @@ import { config } from 'dotenv';
 config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 5000;
+const host = '0.0.0.0';
 
 const startServer = async () => {
   await connectDatabase();
   await setupGraphQLServer(app);
 
-  app.listen({ port }, () => {
+  app.listen({ port, host }, () => {
     console.log(`Server ready at http://localhost:${port}/graphql`);
   });
 };
